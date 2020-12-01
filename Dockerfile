@@ -105,6 +105,7 @@ USER $UNAME
 
 # Plugins
 RUN cd $UHOME/bundle/ \
+    && git clone --depth 1 https://github.com/dense-analysis/ale.git \
     && git clone --depth 1 https://github.com/pangloss/vim-javascript \
     && git clone --depth 1 https://github.com/scrooloose/nerdcommenter \
     && git clone --depth 1 https://github.com/godlygeek/tabular \
@@ -158,6 +159,9 @@ RUN  mv -f $UHOME/.vimrc $UHOME/.vimrc~ \
      && cat  $UHOME/my.vimrc \
      >> $UHOME/.vimrc~ \
      && rm $UHOME/my.vimrc \
+     && curl -s \
+     https://raw.githubusercontent.com/dense-analysis/ale/master/autoload/ale.vim \
+     >> $UHOME/.vimrc~ \
      && sed -i '/colorscheme peaksea/d' $UHOME/.vimrc~
 
 # Pathogen help tags generation
